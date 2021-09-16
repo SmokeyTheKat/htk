@@ -1,0 +1,29 @@
+#!/bin/bash
+
+CC=gcc
+CFLAGS=-lm
+
+FILE=~/.tmp/crun_file.c
+OFILE=~/.tmp/crun_file
+
+SCRIPT=""
+
+for i in $@; do
+	SCRIPT=$( echo -e "${SCRIPT}\n${i}")
+done
+
+echo ""				>  ${FILE}
+echo "#include <stdio.h>" 	>> ${FILE}
+echo "#include <stdlib.h>" 	>> ${FILE}
+echo "int main(void) {"		>> ${FILE}
+
+for i in "$@"; do
+	echo ${i}		>> ${FILE}
+done
+
+echo "return 0;"		>> ${FILE}
+echo "}"			>> ${FILE}
+
+${CC} -o ${OFILE} ${FILE} ${CFLAGS}
+
+sh -c ${OFILE}

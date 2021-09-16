@@ -1,0 +1,43 @@
+#!/bin/bash
+argv=("$@")
+com="echo"
+n=0
+dlen=0
+i=0
+tcls=false
+for v in $@; do
+	if [[ "-n" == ${v:0:2} ]]; then
+		n=${argv[$i+1]}
+	fi
+	if [[ "-c" == ${v:0:2} ]]; then
+		com="${argv[$i+1]}"
+	fi
+	if [[ "-e" == ${v:0:2} ]]; then
+		tcls=true
+	fi
+	i=$((i+1))
+done
+
+if [[ $n == 0 ]]; then
+	n='0.01'
+fi
+
+if [[ ${n} == *"."* ]]; then
+	dlen=$(($(wc -m <<< $(echo "${n}" | grep -o "\..*[^0]")) - 1))
+fi
+
+if [[ ${tcls} == true ]];
+	then clearcom='clear'
+	else clearcom='printf "\x1b[u"'
+fi
+
+printf "\x1b[s"
+
+now=$(date +%s)sec
+while true; do
+	ctime=$(TZ=UTC date --date now-${now} +%H:%M:%S.%N)
+	eval "${com} ${ctime:0:$((dlen+8))}"
+	sleep ${n}
+	eval ${clearcom}
+done
+

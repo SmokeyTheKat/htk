@@ -1,0 +1,4 @@
+#!/bin/bash
+
+TTY="/dev/$(ps ax | grep $$ | head -n1 | awk '{print $2}')"
+tee $TTY

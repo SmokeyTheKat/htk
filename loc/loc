@@ -1,0 +1,28 @@
+#!/bin/bash
+
+gerpsrc=""
+printfile=0
+
+for i in $@; do
+	if [[ ${i:0:2} == "-p" ]]; then
+		printfile=1
+	else
+		gerpsrc="${gerpsrc}\|.*\\$i\$"
+	fi
+done
+
+gerpsrc=$(echo $gerpsrc | sed -e 's/\\|//')
+
+echo "$gerpsrc"
+
+count=0
+
+for i in $(find ./ 2>&1 /dev/null | grep "$gerpsrc" | sed -e 's/ /\\ /g'); do
+	iloc=$(cat $i | wc -l)
+	if [[ printfile -eq 1 ]]; then
+		printf "%d\t%s\n" $iloc "$i" 
+	fi
+	count=$((count + iloc))
+done
+
+printf "\n%d lines of code!\n" $count

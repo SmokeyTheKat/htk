@@ -1,0 +1,12 @@
+#!/bin/bash
+
+filefmt="$1"
+findfmt="$2"
+
+for i in $(find ./ -type f | grep "${filefmt}"); do
+	catres="$(cat $i | grep -o "${findfmt}")"
+	if [[ -n "$catres" ]]; then
+		printf "%s:\n%s\n" "$i" "$catres"
+	fi
+	echo ""
+done
