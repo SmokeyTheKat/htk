@@ -1,0 +1,13 @@
+#!/bin/bash
+
+fmt=""
+nums=""
+
+for i in "$@"; do
+	fmt="${fmt}%lc "
+	nums="${nums},${i}"
+done
+
+code="printf(\"${fmt}\"${nums});"
+
+crun '#include <locale.h>' 'setlocale(LC_ALL, "");' "${code}"

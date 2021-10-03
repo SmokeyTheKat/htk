@@ -1,0 +1,14 @@
+#!/bin/bash
+
+MUTEFILE=~/.config/beep/mute
+
+if [[ $1 == "mute" ]]; then
+	touch ${MUTEFILE}
+elif [[ $1 == "unmute" ]]; then
+	rm -f ${MUTEFILE}
+fi
+
+if [[ ! -f ${MUTEFILE} ]]; then
+	TTY=$(ps $(pgrep Xorg) | grep -o "tty[0-9]\+")
+	printf "\a" > /dev/${TTY}
+fi

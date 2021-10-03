@@ -1,0 +1,3 @@
+#!/bin/bash
+EDITOR='firefox --new-window'
+${EDITOR} "https://duckduckgo.com/?q=!cppr+$1"
