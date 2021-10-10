@@ -1,0 +1,3 @@
+#!/bin/bash
+COMMAND="$@"
+bash -c "${COMMAND} 2>&1 > /dev/null &"
