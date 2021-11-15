@@ -1,0 +1,28 @@
+#!/bin/bash
+
+datadir=~/.local
+
+if [ $# -eq 2 -a $1 = "init" ]; then
+	if [ -d ${datadir}/share/prji/$2 ]; then
+		cp -rf ${datadir}/share/prji/$2/* ./
+	else
+		echo "template does not exist!"
+	fi
+fi
+
+if [ $# -eq 2 -a $1 = "new" ]; then
+	mkdir -p ${datadir}/share/prji/$2/
+	cp -rf ./* ${datadir}/share/prji/$2/
+fi
+
+if [ $# -eq 2 -a $1 = "remove" ]; then
+	if [ -d ${datadir}/share/prji/$2 ]; then
+		rm -rf ${datadir}/share/prji/$2/
+	else
+		echo "template does not exist!"
+	fi
+fi
+
+if [ $# -eq 1 -a $1 = "list" ]; then
+	ls ${datadir}/share/prji/
+fi
