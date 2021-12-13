@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [[ $2 ]]; then
+	chatterino -c "$1" 2>&1 > /dev/null &
+fi
+
+mpv "https://twitch.tv/$1" 2>&1 > /dev/null &

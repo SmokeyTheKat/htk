@@ -1,0 +1,5 @@
+#!/bin/bash
+
+EDITOR=less
+
+$(echo "$@" | sed -e 's/\n/ /g') 2>&1 | ${EDITOR}

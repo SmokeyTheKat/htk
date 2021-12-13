@@ -1,0 +1,34 @@
+#!/bin/python3
+import sys
+from textblob import TextBlob
+
+argv = sys.argv[1:]
+
+def main(argv):
+	print(argv)
+	fromLang = "any"
+	toLang = "en"
+	
+	if len(argv) == 1:
+		fromLang = argv[0]
+	elif len(argv) == 2:
+		fromLang = argv[0]
+		toLang = argv[1]
+
+	while 1:
+		text = input(fromLang + " -> " + toLang + ": ")
+
+		if text == "!":
+			fromLang, toLang = toLang, fromLang
+			continue
+
+		try:
+			res = ""
+			if fromLang == "any":
+				result = str(TextBlob(text).translate(to=toLang))
+			else: result = str(TextBlob(text).translate(from_lang=fromLang, to=toLang))
+			print(result)
+		except Exception as e:
+			print(e)
+
+main(argv)

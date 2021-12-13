@@ -1,0 +1,6 @@
+#!/bin/bash
+xwd > __tmp__.xwd
+NAME=$(rstr 6).png
+convert __tmp__.xwd ${NAME}
+rm __tmp__.xwd
+echo ${NAME}
