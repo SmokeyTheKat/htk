@@ -1,0 +1,9 @@
+#!/bin/bash
+
+filefmt="$1"
+findfmt=$(echo "$2" | sed -e 's/\//\\\//g')
+replacefmt=$(echo "$3" | sed -e 's/\//\\\//g')
+
+for i in $(find ./ -type f | grep "${filefmt}"); do
+	sed -i "s/${findfmt}/${replacefmt}/g" $i
+done
