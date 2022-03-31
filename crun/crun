@@ -12,17 +12,18 @@ for i in $@; do
 	SCRIPT=$( echo -e "${SCRIPT}\n${i}")
 done
 
-echo ""				>  ${FILE}
-echo "#include <stdio.h>" 	>> ${FILE}
-echo "#include <stdlib.h>" 	>> ${FILE}
-echo "int main(void) {"		>> ${FILE}
+echo ""                >  ${FILE}
+echo "#include <stdio.h>"     >> ${FILE}
+echo "#include <math.h>"     >> ${FILE}
+echo "#include <stdlib.h>"     >> ${FILE}
+echo "int main(void) {"        >> ${FILE}
 
 for i in "$@"; do
-	echo ${i}		>> ${FILE}
+	echo ${i}        >> ${FILE}
 done
 
-echo "return 0;"		>> ${FILE}
-echo "}"			>> ${FILE}
+echo "return 0;"        >> ${FILE}
+echo "}"            >> ${FILE}
 
 ${CC} -o ${OFILE} ${FILE} ${CFLAGS}
 

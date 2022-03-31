@@ -4,9 +4,9 @@ filefmt="$1"
 findfmt="$2"
 
 for i in $(find ./ -type f | grep "${filefmt}"); do
-	catres="$(cat $i | grep -n --color=always "${findfmt}")"
+	catres="$(cat $i | grep -n -I --color=always "${findfmt}")"
 	if [[ -n "$catres" ]]; then
-		printf "%s:\n%s\n" "$i" "$catres"
+		printf "%s\n%s\n" "$i" "$catres"
 		echo
 	fi
 done
